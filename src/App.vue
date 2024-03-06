@@ -68,6 +68,7 @@ import CityWeatherCard from "./components/weather/CityWeatherCard.vue";
 
 const hours = reactive(["Now", "2 PM", "3 PM", "4 PM", "5 PM"]);
 const days = reactive(["Today", "Tomorrow", "Wednesday", "Thursday", "Friday"]);
+const degrees = reactive([2, 3, 10, 15, 32]);
 const weather = reactive([
   "Frozen",
   "Frozen",
@@ -75,9 +76,7 @@ const weather = reactive([
   "Partly Cloudy",
   "Sunny",
 ]);
-// TODO: provide/inject
 const { isMobile } = useResponsiveness();
-const degrees = reactive([2, 3, 10, 15, 32]);
 </script>
 
 <style scoped>

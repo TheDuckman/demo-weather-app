@@ -6,11 +6,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import {
-  IconHaloSizes,
-  IconSizes,
-  WeatherIconsMap,
-} from "../../utils/constants";
+import { WeatherIconsMap } from "../../utils/constants";
+import { IconHaloSizes, IconSizes } from "../../utils/enums";
 import IconCircle from "../layout/IconCircle.vue";
 
 const props = defineProps({

@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { WeatherColors, IconHaloSizes } from "../../utils/constants";
+import { WeatherColors, IconHaloSizes } from "../../utils/enums";
 
 const props = defineProps({
   color: {

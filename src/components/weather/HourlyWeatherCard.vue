@@ -16,7 +16,12 @@
       {{ hour }}
     </div>
     <div class="d-flex justify-content-center">
-      <WeatherIcon :color="weatherColor" iconSize="small" haloSize="larger" />
+      <WeatherIcon
+        :color="weatherColor"
+        iconSize="small"
+        haloSize="larger"
+        :weather="weather"
+      />
     </div>
     <TemperatureBox :degrees="degrees" />
   </div>
@@ -38,9 +43,14 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  weather: {
+    type: String,
+    required: true,
+  },
 });
 const hour = computed(() => props.hour);
 const degrees = computed(() => props.degrees);
+const weather = computed(() => props.weather);
 
 const { isMobile } = useResponsiveness();
 const { weatherColor } = useWeatherColors(degrees.value);

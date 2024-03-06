@@ -1,5 +1,5 @@
 import { computed } from "vue";
-import { WeatherColors } from "../utils/constants";
+import { WeatherColors } from "../utils/enums";
 
 export default function useWeatherColors(degrees: number) {
   const weatherColor = computed(() => {

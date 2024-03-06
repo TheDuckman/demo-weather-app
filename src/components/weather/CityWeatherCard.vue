@@ -25,11 +25,11 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { IconHaloSizes, IconSizes } from "../../utils/enums";
 import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
 import RoundedCard from "../layout/RoundedCard.vue";
 import useResponsiveness from "../../composable/useResponsiveness";
-import { IconHaloSizes, IconSizes } from "../../utils/constants";
 import useWeatherColors from "../../composable/useWeatherColors";
 
 const props = defineProps({

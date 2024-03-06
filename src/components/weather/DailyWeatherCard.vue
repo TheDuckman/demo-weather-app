@@ -5,6 +5,7 @@
         :haloSize="IconHaloSizes.SMALL"
         :iconSize="IconSizes.SMALL"
         :color="weatherColor"
+        :weather="weather"
       />
     </template>
     <template #text>
@@ -23,7 +24,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { IconHaloSizes, IconSizes } from "../../utils/constants";
+import { IconHaloSizes, IconSizes } from "../../utils/enums";
 import useResponsiveness from "../../composable/useResponsiveness";
 import RoundedCard from "../layout/RoundedCard.vue";
 import WeatherIcon from "./WeatherIcon.vue";
@@ -49,6 +50,7 @@ const { isMobile } = useResponsiveness();
 
 const day = computed(() => props.day);
 const degrees = computed(() => props.degrees);
+const weather = computed(() => props.weather);
 
 const { weatherColor } = useWeatherColors(degrees.value);
 </script>
