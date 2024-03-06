@@ -1,17 +1,15 @@
 <template>
   <RoundedCard :class="isMobile ? 'my-3' : 'mx-3'" :color="color">
     <template #icon>
-      <WeatherIcon size="small" :color="color" class="mt-1" />
+      <WeatherIcon size="small" :color="color" />
     </template>
     <template #text>
-      <TextContainer>
-        <template #title>
-          {{ day }}
-        </template>
-        <template #subtitle>
-          {{ weather }}
-        </template>
-      </TextContainer>
+      <span class="fs-5 fw-medium">
+        {{ day }}
+      </span>
+      <span class="fw-medium" style="font-size: 10pt; color: #696d76">
+        {{ weather }}
+      </span>
     </template>
     <template #temperature>
       <TemperatureBox :degrees="degrees" />
@@ -24,7 +22,6 @@ import { computed } from "vue";
 import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
 import RoundedCard from "../layout/RoundedCard.vue";
-import TextContainer from "../layout/TextContainer.vue";
 import useResponsiveness from "../../composable/useResponsiveness";
 
 const props = defineProps({

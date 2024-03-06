@@ -1,11 +1,14 @@
 <template>
   <div :class="cardClasses">
-    <div class="debugBorder2 d-flex justify-content-center">
+    <div
+      :class="`debugBorder2 ${isMobile ? 'align-items-center' : 'align-items-end'} d-flex justify-content-center `"
+      :style="`${isMobile ? '' : 'height: 30%'}`"
+    >
       <slot name="icon"></slot>
     </div>
     <div
-      :class="`debugBorder2 ${isMobile ? '' : 'text-center'} d-flex flex-column justify-content-center`"
-      :style="`${isMobile ? 'width: 60%' : ''}`"
+      :class="`debugBorder2 ${isMobile ? 'justify-content-center' : 'text-center justify-content-start'} d-flex flex-column `"
+      :style="`${isMobile ? 'width: 60%' : 'height: 30%'}`"
     >
       <slot name="text"></slot>
     </div>

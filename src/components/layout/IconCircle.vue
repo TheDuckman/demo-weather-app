@@ -18,9 +18,16 @@ const props = defineProps({
     required: true,
     default: "large",
   },
+  dark: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const colorClass = computed(() => `${props.color}Circle`);
+const dark = computed(() => props.dark);
+const colorClass = computed(
+  () => `${dark.value ? "dark" : ""}${props.color}Circle`,
+);
 const sizeClass = computed(() => `${props.size}Circle`);
 </script>
 
@@ -28,26 +35,48 @@ const sizeClass = computed(() => `${props.size}Circle`);
 .circleDiv {
   border-radius: 3rem;
 }
-.circleDiv.smallCircle {
+.smallCircle {
   padding: 7px;
   width: 40px;
   height: 40px;
 }
-.circleDiv.largeCircle {
+.mediumCircle {
+  padding: 22px;
+  width: 55px;
+  height: 55px;
+}
+.largeCircle {
   padding: 22px;
   width: 70px;
   height: 70px;
 }
-.circleDiv.blueCircle {
+.largerCircle {
+  padding: 22px;
+  width: 85px;
+  height: 85px;
+}
+.blueCircle {
   background: #c3e0fb;
 }
-.circleDiv.greenCircle {
+.darkblueCircle {
+  background: #96c6f1;
+}
+.greenCircle {
   background: #cdf0eb;
 }
-.circleDiv.yellowCircle {
+.darkgreenCircle {
+  background: #9fd9d1;
+}
+.yellowCircle {
   background: #fff4da;
 }
-.circleDiv.redCircle {
+.darkyellowCircle {
+  background: #ffe6ad;
+}
+.redCircle {
   background: #fdd4d7;
+}
+.darkredCircle {
+  background: #fbb3b8;
 }
 </style>

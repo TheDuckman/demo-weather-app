@@ -10,24 +10,15 @@
           :style="isMobile ? 'padding: 0px' : ''"
         >
           <!-- CITY WEATHER -->
-          <!-- <div
-            class="debugBorder roundedCard d-flex flex-fill flex-sm-column justify-content-between text-center p-2"
-            style="height: 100%"
-          ></div> -->
           <CityWeatherCard
             city="Denver"
             weather="Snowing"
-            :degrees="2"
+            :degrees="25"
           ></CityWeatherCard>
         </div>
         <!-- RIGHT SIDE -->
         <div class="debugBorder col-md-9 col-sm-12" style="padding: 0px">
           <!-- HOURLY WEATHER -->
-          <!-- debugBorder -->
-          <!-- <div
-            class="debugBorder d-flex"
-            style="min-height: 50%; max-height: 100%; overflow-x: scroll"
-          > -->
           <div
             :class="`debugBorder d-flex justify-content-md-between ${isMobile ? '' : 'pt-5'}`"
             :style="`height: ${isMobile ? '40%' : '50%'}; overflow-x: scroll`"
@@ -41,7 +32,6 @@
             />
           </div>
           <!-- DAILY WEATHER -->
-          <!-- debugBorder -->
           <div
             :class="`debugBorder d-md-flex justify-content-md-between ${isMobile ? '' : 'pt-5'}`"
             style="height: 50%"
