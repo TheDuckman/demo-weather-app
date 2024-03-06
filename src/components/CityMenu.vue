@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex menuBar py-3 px-3 debugBorder mb-2">
+  <div :class="['d-flex', 'scrollX', 'py-3', 'px-3', 'debugBorder', 'mb-2']">
     <SmallButton
       v-for="city in cities"
       :key="city.name"
@@ -43,9 +43,3 @@ const citySelected = (cityName: string) => {
   }
 };
 </script>
-
-<style scoped>
-.menuBar {
-  overflow-x: scroll;
-}
-</style>

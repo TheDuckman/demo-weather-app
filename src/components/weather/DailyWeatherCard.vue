@@ -7,7 +7,7 @@
       <span class="fs-5 fw-medium">
         {{ day }}
       </span>
-      <span class="fw-medium" style="font-size: 10pt; color: #696d76">
+      <span class="fw-medium greyTxt smallTxt">
         {{ weather }}
       </span>
     </template>

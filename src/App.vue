@@ -3,12 +3,9 @@
     <TheGreeting />
     <CityMenu />
     <div class="container debugBorder">
-      <div class="row pb-5" style="min-width: 100hw; min-height: 70vh">
+      <div class="row rowContainer">
         <!-- LEFT SIDE -->
-        <div
-          class="debugBorder col-md-3 col-sm-12"
-          :style="isMobile ? 'padding: 0px' : ''"
-        >
+        <div :class="`debugBorder col-md-3 col-sm-12 ${isMobile ? 'p-0' : ''}`">
           <!-- CITY WEATHER -->
           <CityWeatherCard
             city="Denver"
@@ -17,11 +14,16 @@
           ></CityWeatherCard>
         </div>
         <!-- RIGHT SIDE -->
-        <div class="debugBorder col-md-9 col-sm-12" style="padding: 0px">
+        <div class="debugBorder p-0 col-md-9 col-sm-12">
           <!-- HOURLY WEATHER -->
           <div
-            :class="`debugBorder d-flex justify-content-md-between ${isMobile ? '' : 'pt-5'}`"
-            :style="`height: ${isMobile ? '40%' : '50%'}; overflow-x: scroll`"
+            :class="[
+              'debugBorder',
+              'scrollX',
+              'd-flex',
+              'justify-content-md-between',
+              isMobile ? 'hourlyContainerMobile' : 'halfHeight pt-5',
+            ]"
           >
             <HourlyWeatherCard
               v-for="(hour, index) in hours"
@@ -33,8 +35,13 @@
           </div>
           <!-- DAILY WEATHER -->
           <div
-            :class="`debugBorder d-md-flex justify-content-md-between ${isMobile ? '' : 'pt-5'}`"
-            style="height: 50%"
+            :class="[
+              'halfHeight',
+              'debugBorder',
+              'd-md-flex',
+              'justify-content-md-between',
+              isMobile ? '' : 'pt-5',
+            ]"
           >
             <DailyWeatherCard
               v-for="(day, index) in days"
@@ -61,7 +68,6 @@ import CityWeatherCard from "./components/weather/CityWeatherCard.vue";
 
 const hours = reactive(["Now", "2 PM", "3 PM", "4 PM", "5 PM"]);
 const days = reactive(["Today", "Tomorrow", "Wednesday", "Thursday", "Friday"]);
-// const days = reactive(["Today", "Tomorrow", "Wednesday"]);
 const weather = reactive([
   "Frozen",
   "Frozen",
@@ -73,3 +79,15 @@ const weather = reactive([
 const { isMobile } = useResponsiveness();
 const degrees = reactive([2, 3, 10, 15, 32]);
 </script>
+
+<style scoped>
+.rowContainer {
+  min-height: 65vh;
+}
+.halfHeight {
+  height: 50%;
+}
+.hourlyContainerMobile {
+  height: 40%;
+}
+</style>

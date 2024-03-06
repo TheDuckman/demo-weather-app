@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ cityBtn: true, btnBlue: selected }" @click="emit('clicked')">
+  <div :class="`cityBtn ${selected ? 'blueBg' : ''}`" @click="emit('clicked')">
     <slot></slot>
     (IC)
   </div>
@@ -32,8 +32,5 @@ const selected = computed(() => props.selected);
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
-}
-.btnBlue {
-  background-color: #c3e0fb;
 }
 </style>

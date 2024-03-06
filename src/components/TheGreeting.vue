@@ -1,5 +1,5 @@
 <template>
-  <h1 class="mainHeader debugBorder">
+  <h1 class="greetingHeader debugBorder">
     {{ calculatedGreeting }}
   </h1>
 </template>
@@ -24,7 +24,7 @@ const calculatedGreeting = computed<string>((): string => {
 </script>
 
 <style scoped>
-.mainHeader {
+.greetingHeader {
   margin: 1rem 0rem 2rem 0rem;
   padding: 0 0 0 0.8rem;
 }

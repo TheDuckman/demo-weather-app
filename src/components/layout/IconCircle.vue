@@ -26,7 +26,7 @@ const props = defineProps({
 
 const dark = computed(() => props.dark);
 const colorClass = computed(
-  () => `${dark.value ? "dark" : ""}${props.color}Circle`,
+  () => `${dark.value ? "dark" : ""}${props.color}Bg`,
 );
 const sizeClass = computed(() => `${props.size}Circle`);
 </script>
@@ -54,29 +54,5 @@ const sizeClass = computed(() => `${props.size}Circle`);
   padding: 22px;
   width: 85px;
   height: 85px;
-}
-.blueCircle {
-  background: #c3e0fb;
-}
-.darkblueCircle {
-  background: #96c6f1;
-}
-.greenCircle {
-  background: #cdf0eb;
-}
-.darkgreenCircle {
-  background: #9fd9d1;
-}
-.yellowCircle {
-  background: #fff4da;
-}
-.darkyellowCircle {
-  background: #ffe6ad;
-}
-.redCircle {
-  background: #fdd4d7;
-}
-.darkredCircle {
-  background: #fbb3b8;
 }
 </style>

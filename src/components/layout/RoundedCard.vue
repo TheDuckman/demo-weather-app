@@ -1,20 +1,34 @@
 <template>
   <div :class="cardClasses">
     <div
-      :class="`debugBorder2 ${isMobile ? 'align-items-center' : 'align-items-end'} d-flex justify-content-center`"
-      :style="`${isMobile ? 'width: 20%' : 'height: 30%'}`"
+      :class="[
+        'debugBorder2',
+        'd-flex',
+        'justify-content-center',
+        isMobile ? 'align-items-center width20' : 'align-items-end height30',
+      ]"
     >
       <slot name="icon"></slot>
     </div>
     <div
-      :class="`debugBorder2 ${isMobile ? 'justify-content-center' : 'text-center justify-content-start'} d-flex flex-column `"
-      :style="`${isMobile ? 'width: 50%' : 'height: 30%'}`"
+      :class="[
+        'debugBorder2',
+        'd-flex',
+        'flex-column',
+        isMobile
+          ? 'justify-content-center width50'
+          : 'text-center justify-content-start height30',
+      ]"
     >
       <slot name="text"></slot>
     </div>
     <div
-      :class="`debugBorder2 text-center justify-content-end ${isMobile ? 'd-flex align-items-center' : ''}`"
-      :style="`${isMobile ? 'width: 25%' : ''}`"
+      :class="[
+        'debugBorder2',
+        'text-center',
+        'justify-content-end',
+        isMobile ? 'd-flex align-items-center width25' : '',
+      ]"
     >
       <slot name="temperature"></slot>
     </div>
@@ -41,22 +55,23 @@ const color = computed(() => props.color);
 const large = computed(() => props.large);
 const { isMobile } = useResponsiveness();
 const cardClasses = computed(() => {
-  let baseClasses =
-    "debugBorder d-flex flex-fill flex-md-column justify-content-between p-2";
-  if (isMobile.value && !large.value) {
-    // small mobile
-    baseClasses = `${baseClasses} roundedBorderCard px-3`;
-  } else if (isMobile.value && large.value) {
-    // large mobile
-    baseClasses = `${baseClasses} largeRoundedBorderCard largeLayout px-3`;
-  } else if (!isMobile.value && !large.value) {
-    // small desktop
-    baseClasses = `${baseClasses} extraRoundedBorderCard smallLayout`;
+  let classes = [
+    "debugBorder",
+    "d-flex",
+    "flex-fill",
+    "flex-md-column",
+    "justify-content-between",
+    "p-2",
+    `${color.value}Bg`,
+  ];
+  if (isMobile.value) {
+    classes.push("px-3");
+    classes.push(large.value ? "largeRoundedBorderCard" : "roundedBorderCard");
   } else {
-    // large desktop
-    baseClasses = `${baseClasses} extraRoundedBorderCard largeLayout`;
+    classes.push("extraRoundedBorderCard");
+    classes.push(large.value ? "largeLayout" : "smallLayout");
   }
-  return `${baseClasses} ${color.value}Card`;
+  return classes;
 });
 </script>
 
@@ -77,19 +92,16 @@ const cardClasses = computed(() => {
 .extraRoundedBorderCard {
   border-radius: 2rem;
 }
-.blueCard {
-  background: #c3e0fb;
+.height30 {
+  height: 30%;
 }
-
-.greenCard {
-  background: #cdf0eb;
+.width20 {
+  width: 20%;
 }
-
-.yellowCard {
-  background: #fff4da;
+.width25 {
+  width: 25%;
 }
-
-.redCard {
-  background: #fdd4d7;
+.width50 {
+  width: 50%;
 }
 </style>

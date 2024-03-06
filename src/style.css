@@ -23,6 +23,48 @@
   font-family: Inter !important;
   color: #000C23;
 }
+.scrollX {
+  overflow-x: scroll;
+}
+.blueBg {
+  background: #c3e0fb;
+}
+
+.darkblueBg {
+  background: #96c6f1;
+}
+
+.greenBg {
+  background: #cdf0eb;
+}
+
+.darkgreenBg {
+  background: #9fd9d1;
+}
+
+.yellowBg {
+  background: #fff4da;
+}
+
+.darkyellowBg {
+  background: #ffe6ad;
+}
+
+.redBg {
+  background: #fdd4d7;
+}
+
+.darkredBg {
+  background: #fbb3b8;
+}
+.smallTxt {
+  font-size: 10pt;
+}
+.greyTxt {
+  color: #696d76
+}
+
+/* REMOVE DEBUG */
 
 .debugBorder {
   border: 0px solid darkred;

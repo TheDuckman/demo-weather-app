@@ -1,5 +1,5 @@
 <template>
-  <IconCircle color="yellow" :size="iconSize" :dark="dark" class="debugBorder2">
+  <IconCircle color="yellow" :size="iconSize" :dark="dark">
     <WeatherSunny />
   </IconCircle>
 </template>
@@ -34,5 +34,3 @@ const props = defineProps({
 const iconSize = computed(() => props.size);
 const dark = computed(() => props.dark);
 </script>
-
-<style scoped></style>

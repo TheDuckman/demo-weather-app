@@ -1,9 +1,18 @@
 <template>
   <div
-    class="debugBorder d-flex flex-column flex-fill justify-content-around text-center roundedBorderCard p-2 mx-3"
-    :style="isMobile ? 'min-width: 8rem' : 'width: 20%'"
+    :class="[
+      'debugBorder',
+      'd-flex',
+      'flex-column',
+      'flex-fill',
+      'justify-content-around',
+      'text-center',
+      'p-2',
+      'mx-3',
+      isMobile ? 'widthMobile' : 'widthDesktop',
+    ]"
   >
-    <div class="fs-5 fw-bold" style="color: #696d76">
+    <div class="fs-5 fw-bold greyTxt">
       {{ hour }}
     </div>
     <div class="d-flex justify-content-center">
@@ -49,7 +58,10 @@ const color = computed(() => {
 </script>
 
 <style scoped>
-.roundedBorderCard {
-  border-radius: 0.4rem;
+.widthMobile {
+  min-width: 8rem;
+}
+.widthDesktop {
+  width: 20%;
 }
 </style>
