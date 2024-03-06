@@ -1,6 +1,6 @@
 <template>
   <div v-if="large">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center py-1">
       <div :class="isMobile ? 'mobileLargeDegrees' : 'desktopLargeDegrees'">
         {{ degrees }}
       </div>

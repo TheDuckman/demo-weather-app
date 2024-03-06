@@ -1,19 +1,20 @@
 <template>
   <div :class="cardClasses">
     <div
-      :class="`debugBorder2 ${isMobile ? 'align-items-center' : 'align-items-end'} d-flex justify-content-center `"
-      :style="`${isMobile ? '' : 'height: 30%'}`"
+      :class="`debugBorder2 ${isMobile ? 'align-items-center' : 'align-items-end'} d-flex justify-content-center`"
+      :style="`${isMobile ? 'width: 20%' : 'height: 30%'}`"
     >
       <slot name="icon"></slot>
     </div>
     <div
       :class="`debugBorder2 ${isMobile ? 'justify-content-center' : 'text-center justify-content-start'} d-flex flex-column `"
-      :style="`${isMobile ? 'width: 60%' : 'height: 30%'}`"
+      :style="`${isMobile ? 'width: 50%' : 'height: 30%'}`"
     >
       <slot name="text"></slot>
     </div>
     <div
-      :class="`debugBorder2 text-center ${isMobile ? 'd-flex align-items-center' : ''}`"
+      :class="`debugBorder2 text-center justify-content-end ${isMobile ? 'd-flex align-items-center' : ''}`"
+      :style="`${isMobile ? 'width: 25%' : ''}`"
     >
       <slot name="temperature"></slot>
     </div>
