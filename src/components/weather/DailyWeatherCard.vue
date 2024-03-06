@@ -1,5 +1,5 @@
 <template>
-  <RoundedCard :class="isMobile ? 'my-3' : 'mx-3'">
+  <RoundedCard :class="isMobile ? 'my-3' : 'mx-3'" :color="color">
     <template #icon>
       <WeatherIcon size="small" :color="color" class="mt-1" />
     </template>

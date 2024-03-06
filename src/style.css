@@ -25,22 +25,10 @@
 }
 
 .debugBorder {
-  border: 1px solid darkred;
+  border: 0px solid darkred;
 }
-.blueCard {
-  background: #c3e0fb;
-}
-
-.greenCard {
-  background: #cdf0eb;
-}
-
-.yellowCard {
-  background: #fff4da;
-}
-
-.redCard {
-  background: #fdd4d7;
+.debugBorder2 {
+  border: 0px solid darkslateblue;
 }
 /* 
 a {
