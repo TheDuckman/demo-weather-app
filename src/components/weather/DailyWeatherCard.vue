@@ -47,10 +47,10 @@ const props = defineProps({
 });
 
 const { isMobile } = useResponsiveness();
+const { getWeatherColor } = useWeatherColors();
 
 const day = computed(() => props.day);
 const degrees = computed(() => props.degrees);
 const weather = computed(() => props.weather);
-
-const { weatherColor } = useWeatherColors(degrees.value);
+const weatherColor = computed(() => getWeatherColor(degrees.value));
 </script>

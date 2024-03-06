@@ -18,8 +18,8 @@
     <div class="d-flex justify-content-center">
       <WeatherIcon
         :color="weatherColor"
-        iconSize="small"
-        haloSize="larger"
+        :iconSize="IconSizes.SMALL"
+        :haloSize="IconHaloSizes.LARGER"
         :weather="weather"
       />
     </div>
@@ -33,6 +33,7 @@ import useResponsiveness from "../../composable/useResponsiveness";
 import useWeatherColors from "../../composable/useWeatherColors";
 import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
+import { IconHaloSizes, IconSizes } from "../../utils/enums";
 
 const props = defineProps({
   hour: {
@@ -48,12 +49,14 @@ const props = defineProps({
     required: true,
   },
 });
+
+const { isMobile } = useResponsiveness();
+const { getWeatherColor } = useWeatherColors();
+
 const hour = computed(() => props.hour);
 const degrees = computed(() => props.degrees);
 const weather = computed(() => props.weather);
-
-const { isMobile } = useResponsiveness();
-const { weatherColor } = useWeatherColors(degrees.value);
+const weatherColor = computed(() => getWeatherColor(degrees.value));
 </script>
 
 <style scoped>

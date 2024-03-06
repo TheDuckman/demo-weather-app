@@ -1,12 +1,12 @@
 <template>
   <IconCircle :haloSize="haloSize" :dark="dark">
-    <img :src="iconImgPath" :width="iconWidth" />
+    <img :src="weatherInfo.icon" :width="iconWidth" />
   </IconCircle>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { WeatherIconsMap } from "../../utils/constants";
+import { WeatherCodes } from "../../utils/constants";
 import { IconHaloSizes, IconSizes } from "../../utils/enums";
 import IconCircle from "../layout/IconCircle.vue";
 
@@ -25,10 +25,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  weather: {
-    type: String,
+  weatherCode: {
+    type: Number,
     required: true,
-    default: "Sunny",
+    default: 1000,
   },
 });
 
@@ -42,8 +42,7 @@ const iconWidth = computed(() => {
 });
 const haloSize = computed(() => props.haloSize);
 const dark = computed(() => props.dark);
-const weather = computed(() => props.weather);
-const iconImgPath = computed(
-  () => WeatherIconsMap[weather.value as keyof typeof WeatherIconsMap],
-);
+const weatherCode = computed(() => props.weatherCode);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const weatherInfo = computed(() => (WeatherCodes as any)[weatherCode.value]);
 </script>

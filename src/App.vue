@@ -8,9 +8,9 @@
         <div :class="`debugBorder col-md-3 col-sm-12 ${isMobile ? 'p-0' : ''}`">
           <!-- CITY WEATHER -->
           <CityWeatherCard
-            city="Denver"
-            weather="Snowing"
-            :degrees="25"
+            :city="currCity"
+            :weatherObj="currWeatherObj"
+            :degrees="currentTemp"
           ></CityWeatherCard>
         </div>
         <!-- RIGHT SIDE -->
@@ -58,13 +58,15 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
+import requester from "./requester";
 import useResponsiveness from "./composable/useResponsiveness";
 import TheGreeting from "./components/TheGreeting.vue";
 import CityMenu from "./components/CityMenu.vue";
 import DailyWeatherCard from "./components/weather/DailyWeatherCard.vue";
 import HourlyWeatherCard from "./components/weather/HourlyWeatherCard.vue";
 import CityWeatherCard from "./components/weather/CityWeatherCard.vue";
+import { WeatherObj } from "./utils/types";
 
 const hours = reactive(["Now", "2 PM", "3 PM", "4 PM", "5 PM"]);
 const days = reactive(["Today", "Tomorrow", "Wednesday", "Thursday", "Friday"]);
@@ -77,6 +79,21 @@ const weather = reactive([
   "Sunny",
 ]);
 const { isMobile } = useResponsiveness();
+const currCity = ref("Franca");
+const currentTemp = ref(0);
+const currWeatherObj = reactive<WeatherObj>({
+  code: 1000,
+  text: "",
+});
+
+onMounted(async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const weather: any = await requester.currentWeather(currCity.value);
+  console.log({ weather: weather.current });
+  currWeatherObj.text = weather.current.condition.text;
+  currWeatherObj.code = weather.current.condition.code;
+  currentTemp.value = Math.round(weather.current.temp_c);
+});
 </script>
 
 <style scoped>

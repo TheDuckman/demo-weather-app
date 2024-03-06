@@ -1,8 +1,7 @@
-import { computed } from "vue";
 import { WeatherColors } from "../utils/enums";
 
-export default function useWeatherColors(degrees: number) {
-  const weatherColor = computed(() => {
+export default function useWeatherColors() {
+  const getWeatherColor = (degrees: number) => {
     switch (true) {
       case degrees < 6:
         return WeatherColors.BLUE;
@@ -13,7 +12,7 @@ export default function useWeatherColors(degrees: number) {
       default:
         return WeatherColors.RED;
     }
-  });
+  };
 
-  return { weatherColor };
+  return { getWeatherColor };
 }
