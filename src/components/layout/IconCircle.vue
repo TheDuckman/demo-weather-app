@@ -1,22 +1,32 @@
 <template>
-  <div :class="`circleDiv ${colorClass} ${sizeClass}`">
+  <div
+    :class="[
+      'circleDiv',
+      'd-flex',
+      'justify-content-center',
+      'align-items-center',
+      colorClass,
+      sizeClass,
+    ]"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { WeatherColors, IconHaloSizes } from "../../utils/constants";
 
 const props = defineProps({
   color: {
     type: String,
     required: true,
-    default: "blue",
+    default: WeatherColors.BLUE,
   },
-  size: {
+  haloSize: {
     type: String,
     required: true,
-    default: "large",
+    default: IconHaloSizes.LARGE,
   },
   dark: {
     type: Boolean,
@@ -28,7 +38,7 @@ const dark = computed(() => props.dark);
 const colorClass = computed(
   () => `${dark.value ? "dark" : ""}${props.color}Bg`,
 );
-const sizeClass = computed(() => `${props.size}Circle`);
+const sizeClass = computed(() => `${props.haloSize}Circle`);
 </script>
 
 <style scoped>

@@ -1,7 +1,11 @@
 <template>
-  <RoundedCard :class="isMobile ? 'my-3' : 'mx-3'" :color="color">
+  <RoundedCard :class="isMobile ? 'my-3' : 'mx-3'" :color="weatherColor">
     <template #icon>
-      <WeatherIcon size="small" :color="color" />
+      <WeatherIcon
+        :haloSize="IconHaloSizes.SMALL"
+        :iconSize="IconSizes.SMALL"
+        :color="weatherColor"
+      />
     </template>
     <template #text>
       <span class="fs-5 fw-medium">
@@ -19,10 +23,12 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { IconHaloSizes, IconSizes } from "../../utils/constants";
+import useResponsiveness from "../../composable/useResponsiveness";
+import RoundedCard from "../layout/RoundedCard.vue";
 import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
-import RoundedCard from "../layout/RoundedCard.vue";
-import useResponsiveness from "../../composable/useResponsiveness";
+import useWeatherColors from "../../composable/useWeatherColors";
 
 const props = defineProps({
   day: {
@@ -43,16 +49,6 @@ const { isMobile } = useResponsiveness();
 
 const day = computed(() => props.day);
 const degrees = computed(() => props.degrees);
-const color = computed(() => {
-  switch (true) {
-    case degrees.value < 6:
-      return "blue";
-    case degrees.value < 15:
-      return "green";
-    case degrees.value < 25:
-      return "yellow";
-    default:
-      return "red";
-  }
-});
+
+const { weatherColor } = useWeatherColors(degrees.value);
 </script>

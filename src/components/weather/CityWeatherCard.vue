@@ -1,7 +1,13 @@
 <template>
-  <RoundedCard large :color="color">
+  <RoundedCard large :color="weatherColor">
     <template #icon>
-      <WeatherIcon :size="isMobile ? 'medium' : 'larger'" :color="color" dark />
+      <WeatherIcon
+        :haloSize="isMobile ? IconHaloSizes.LARGE : IconHaloSizes.LARGER"
+        :iconSize="isMobile ? IconSizes.SMALL : IconSizes.LARGE"
+        :color="weatherColor"
+        :weather="weather"
+        dark
+      />
     </template>
     <template #text>
       <span class="fs-3 fw-medium">
@@ -23,6 +29,8 @@ import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
 import RoundedCard from "../layout/RoundedCard.vue";
 import useResponsiveness from "../../composable/useResponsiveness";
+import { IconHaloSizes, IconSizes } from "../../utils/constants";
+import useWeatherColors from "../../composable/useWeatherColors";
 
 const props = defineProps({
   city: {
@@ -41,18 +49,9 @@ const props = defineProps({
 
 const { isMobile } = useResponsiveness();
 const city = computed(() => props.city);
-const weather = computed(() => props.weather);
+// TODO change
+const weather = computed(() => "Cloudy" || props.weather);
 const degrees = computed(() => props.degrees);
-const color = computed(() => {
-  switch (true) {
-    case degrees.value < 6:
-      return "blue";
-    case degrees.value < 15:
-      return "green";
-    case degrees.value < 25:
-      return "yellow";
-    default:
-      return "red";
-  }
-});
+
+const { weatherColor } = useWeatherColors(degrees.value);
 </script>
