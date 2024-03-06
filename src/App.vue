@@ -1,5 +1,5 @@
 <template>
-  <div class="container debugBorder" :style="isMobile ? '' : 'max-width: 75%'">
+  <div class="container debugBorder">
     <TheGreeting />
     <CityMenu />
     <div class="container debugBorder">
