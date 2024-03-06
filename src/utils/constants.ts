@@ -17,6 +17,8 @@ export const WeatherIconsMap = {
   Cloudy: cloudyPath,
 };
 
+export const BaseWeatherCode = 1000;
+
 export const WeatherCodes = {
   "1000": {
     code: 1000,

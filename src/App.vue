@@ -10,7 +10,7 @@
           <CityWeatherCard
             :city="currCity"
             :weatherObj="currWeatherObj"
-            :degrees="currentTemp"
+            :degrees="currWeatherObj.tempC"
           ></CityWeatherCard>
         </div>
         <!-- RIGHT SIDE -->
@@ -44,11 +44,11 @@
             ]"
           >
             <DailyWeatherCard
-              v-for="(day, index) in days"
-              :key="day"
-              :day="day"
-              :weather="weather[index]"
-              :degrees="degrees[index]"
+              v-for="forecastDay in forecastArr"
+              :key="forecastDay.weekday"
+              :day="forecastDay.weekday"
+              :weather="forecastDay.text"
+              :degrees="forecastDay.tempC"
             />
           </div>
         </div>
@@ -67,9 +67,10 @@ import DailyWeatherCard from "./components/weather/DailyWeatherCard.vue";
 import HourlyWeatherCard from "./components/weather/HourlyWeatherCard.vue";
 import CityWeatherCard from "./components/weather/CityWeatherCard.vue";
 import { WeatherObj } from "./utils/types";
+import { BaseWeatherCode } from "./utils/constants";
+import useWeekDays from "./composable/useWeekdays";
 
 const hours = reactive(["Now", "2 PM", "3 PM", "4 PM", "5 PM"]);
-const days = reactive(["Today", "Tomorrow", "Wednesday", "Thursday", "Friday"]);
 const degrees = reactive([2, 3, 10, 15, 32]);
 const weather = reactive([
   "Frozen",
@@ -79,20 +80,41 @@ const weather = reactive([
   "Sunny",
 ]);
 const { isMobile } = useResponsiveness();
+const { getWeekdayFromDbDate } = useWeekDays();
 const currCity = ref("Franca");
-const currentTemp = ref(0);
 const currWeatherObj = reactive<WeatherObj>({
-  code: 1000,
+  code: BaseWeatherCode,
   text: "",
+  tempC: 0,
 });
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const forecastArr = reactive<any[]>([]);
 
 onMounted(async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const weather: any = await requester.currentWeather(currCity.value);
-  console.log({ weather: weather.current });
-  currWeatherObj.text = weather.current.condition.text;
-  currWeatherObj.code = weather.current.condition.code;
-  currentTemp.value = Math.round(weather.current.temp_c);
+  const currWeatherData: any = await requester.currentWeather(currCity.value);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const forecastWeatherData: any = await requester.forecastWeather(
+    currCity.value,
+  );
+  console.log({ currW: currWeatherData.current, foreW: forecastWeatherData });
+  // current
+  currWeatherObj.text = currWeatherData.current.condition.text;
+  currWeatherObj.code = currWeatherData.current.condition.code;
+  currWeatherObj.tempC = Math.round(currWeatherData.current.temp_c);
+
+  // forecast
+  forecastArr.push(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...forecastWeatherData.forecast.forecastday.map((dayData: any) => {
+      return {
+        weekday: getWeekdayFromDbDate(dayData.date), // change
+        tempC: Math.round(dayData.day.avgtemp_c),
+        text: dayData.day.condition.text,
+        code: dayData.day.condition.code,
+      };
+    }),
+  );
 });
 </script>
 

@@ -15,6 +15,17 @@ const currentWeather = async (city: string): Promise<JSON> => {
   return res.data;
 };
 
+const forecastWeather = async (city: string): Promise<JSON> => {
+  const res = await axios.get<JSON>("/forecast.json", {
+    params: {
+      q: city,
+      days: 5,
+    },
+  });
+  return res.data;
+};
+
 export default {
   currentWeather,
+  forecastWeather,
 };

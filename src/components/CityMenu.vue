@@ -18,17 +18,22 @@ import SmallButton from "./layout/SmallButton.vue";
 
 const cities = reactive([
   {
-    name: "Denver",
+    name: "Sao Paulo",
     icon: "ImageFilterHdr",
     selected: true,
   },
   {
-    name: "São Paulo",
+    name: "Niteroi",
     icon: "city",
     selected: false,
   },
   {
-    name: "New York",
+    name: "Franca",
+    icon: "city",
+    selected: false,
+  },
+  {
+    name: "Edmonton",
     icon: "city",
     selected: false,
   },

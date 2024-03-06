@@ -5,7 +5,7 @@
         :haloSize="isMobile ? IconHaloSizes.LARGE : IconHaloSizes.LARGER"
         :iconSize="isMobile ? IconSizes.SMALL : IconSizes.LARGE"
         :color="weatherColor"
-        :weatherCode="weatherObj.code || 1000"
+        :weatherCode="weatherObj.code || BaseWeatherCode"
         dark
       />
     </template>
@@ -26,12 +26,13 @@
 <script setup lang="ts">
 import { PropType, computed } from "vue";
 import { IconHaloSizes, IconSizes } from "../../utils/enums";
+import { WeatherObj } from "../../utils/types";
+import { BaseWeatherCode } from "../../utils/constants";
 import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
 import RoundedCard from "../layout/RoundedCard.vue";
 import useResponsiveness from "../../composable/useResponsiveness";
 import useWeatherColors from "../../composable/useWeatherColors";
-import { WeatherObj } from "../../utils/types";
 
 const props = defineProps({
   city: {
@@ -52,7 +53,7 @@ const { isMobile } = useResponsiveness();
 const { getWeatherColor } = useWeatherColors();
 const city = computed(() => props.city);
 const weatherObj = computed(
-  () => props.weatherObj || { code: 1000, text: "Sunny" },
+  () => props.weatherObj || { code: BaseWeatherCode, text: "Sunny" },
 );
 const degrees = computed(() => props.degrees);
 const weatherColor = computed(() => getWeatherColor(degrees.value));

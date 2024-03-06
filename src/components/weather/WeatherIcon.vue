@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { WeatherCodes } from "../../utils/constants";
+import { BaseWeatherCode, WeatherCodes } from "../../utils/constants";
 import { IconHaloSizes, IconSizes } from "../../utils/enums";
 import IconCircle from "../layout/IconCircle.vue";
 
@@ -28,7 +28,7 @@ const props = defineProps({
   weatherCode: {
     type: Number,
     required: true,
-    default: 1000,
+    default: BaseWeatherCode,
   },
 });
 
