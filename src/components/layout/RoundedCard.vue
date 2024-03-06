@@ -1,12 +1,14 @@
 <template>
   <div :class="cardClasses">
-    <div class="d-flex justify-content-center">
+    <div class="debugBorder2 d-flex justify-content-center">
       <slot name="icon"></slot>
     </div>
-    <div class="d-flex flex-column">
+    <div :class="`debugBorder2 text-center d-flex flex-column`">
       <slot name="text"></slot>
     </div>
-    <div :class="isMobile ? 'd-flex align-items-center' : ''">
+    <div
+      :class="`debugBorder2 text-center ${isMobile ? 'd-flex align-items-center' : ''}`"
+    >
       <slot name="temperature"></slot>
     </div>
   </div>
@@ -32,15 +34,20 @@ const color = computed(() => props.color);
 const large = computed(() => props.large);
 const { isMobile } = useResponsiveness();
 const cardClasses = computed(() => {
-  let baseClasses = large.value
-    ? "debugBorder roundedCard d-flex flex-fill flex-sm-column justify-content-between text-center p-2 largeLayout"
-    : "debugBorder d-flex flex-fill flex-sm-column justify-content-between text-center p-2";
-  if (isMobile) {
-    baseClasses =
-      baseClasses +
-      (isMobile.value
-        ? " roundedBorderCard"
-        : " extraRoundedBorderCard smallLayout");
+  let baseClasses =
+    "debugBorder d-flex flex-fill flex-sm-column justify-content-between p-2 ";
+  if (isMobile.value && !large.value) {
+    // small mobile
+    baseClasses = `${baseClasses} roundedBorderCard`;
+  } else if (isMobile.value && large.value) {
+    // large mobile
+    baseClasses = `${baseClasses} largeRoundedBorderCard largeLayout`;
+  } else if (!isMobile.value && !large.value) {
+    // small desktop
+    baseClasses = `${baseClasses} extraRoundedBorderCard smallLayout`;
+  } else {
+    // large desktop
+    baseClasses = `${baseClasses} extraRoundedBorderCard largeLayout`;
   }
   return `${baseClasses} ${color.value}Card`;
 });
@@ -53,5 +60,14 @@ const cardClasses = computed(() => {
 }
 .smallLayout {
   width: 20%;
+}
+.roundedBorderCard {
+  border-radius: 0.6rem;
+}
+.largeRoundedBorderCard {
+  border-radius: 1rem;
+}
+.extraRoundedBorderCard {
+  border-radius: 2rem;
 }
 </style>

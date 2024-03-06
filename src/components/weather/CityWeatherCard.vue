@@ -1,7 +1,7 @@
 <template>
   <RoundedCard large>
     <template #icon>
-      <WeatherIcon size="small" :color="color" class="mt-1" />
+      <WeatherIcon size="large" :color="color" class="mt-1" />
     </template>
     <template #text>
       <TextContainer>
@@ -14,7 +14,7 @@
       </TextContainer>
     </template>
     <template #temperature>
-      <TemperatureBox :degrees="degrees" />
+      <TemperatureBox :degrees="degrees" large />
     </template>
   </RoundedCard>
 </template>
@@ -24,6 +24,7 @@ import { computed } from "vue";
 import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
 import RoundedCard from "../layout/RoundedCard.vue";
+import TextContainer from "../layout/TextContainer.vue";
 
 const props = defineProps({
   city: {
