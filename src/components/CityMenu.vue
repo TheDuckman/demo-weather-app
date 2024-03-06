@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex menuBar py-3 px-3 debugBorder">
+  <div class="d-flex menuBar py-3 px-3 debugBorder mb-2">
     <SmallButton
       v-for="city in cities"
       :key="city.name"

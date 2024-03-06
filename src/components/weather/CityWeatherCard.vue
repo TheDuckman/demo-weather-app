@@ -39,6 +39,7 @@ const props = defineProps({
     required: true,
   },
 });
+
 const city = computed(() => props.city);
 const weather = computed(() => props.weather);
 const degrees = computed(() => props.degrees);

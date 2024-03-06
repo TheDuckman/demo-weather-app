@@ -1,5 +1,5 @@
 <template>
-  <h1 class="mainHeader">
+  <h1 class="mainHeader debugBorder">
     {{ calculatedGreeting }}
   </h1>
 </template>
@@ -25,6 +25,7 @@ const calculatedGreeting = computed<string>((): string => {
 
 <style scoped>
 .mainHeader {
-  margin: 1rem 0rem 3rem 0.7rem;
+  margin: 1rem 0rem 2rem 0rem;
+  padding: 0 0 0 0.8rem;
 }
 </style>

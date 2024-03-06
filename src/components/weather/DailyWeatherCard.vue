@@ -58,21 +58,4 @@ const color = computed(() => {
       return "red";
   }
 });
-const cardClasses = computed(() => {
-  let baseClasses =
-    "d-flex flex-fill flex-sm-column justify-content-between text-center p-2 my-2 mx-3";
-  baseClasses =
-    baseClasses +
-    (isMobile.value ? " roundedBorderCard" : " extraRoundedBorderCard");
-  return `${baseClasses} ${color.value}Card`;
-});
 </script>
-
-<style scoped>
-.roundedBorderCard {
-  border-radius: 0.4rem;
-}
-.extraRoundedBorderCard {
-  border-radius: 2rem;
-}
-</style>
