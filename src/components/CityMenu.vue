@@ -4,11 +4,10 @@
       v-for="city in cities"
       :key="city.name"
       :icon="city.icon"
+      :text="city.name"
       :selected="city.selected"
       @clicked="setCity(city.name)"
-    >
-      {{ city.name }}
-    </SmallButton>
+    />
   </div>
 </template>
 

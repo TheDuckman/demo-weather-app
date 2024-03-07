@@ -16,27 +16,27 @@ export const useStore = defineStore("store", () => {
   const availableCities = ref<CityObj[]>([
     {
       name: "New York",
-      icon: "ImageFilterHdr",
+      icon: "&#x1F3E2;",
       selected: true,
     },
     {
-      name: "Amsterdam",
-      icon: "city",
+      name: "Toronto",
+      icon: "&#x26C4",
+      selected: false,
+    },
+    {
+      name: "Rio de Janeiro",
+      icon: "&#x1F3D6",
       selected: false,
     },
     {
       name: "Lagos",
-      icon: "city",
-      selected: false,
-    },
-    {
-      name: "Toronto",
-      icon: "city",
+      icon: "&#x1F1F3;&#x1F1EC",
       selected: false,
     },
     {
       name: "Prague",
-      icon: "city",
+      icon: "&#x1F3F0",
       selected: false,
     },
   ]);
@@ -143,7 +143,8 @@ export const useStore = defineStore("store", () => {
         code: hour.condition.code,
         text: hour.condition.text,
         tempC: Math.round(hour.temp_c),
-        hour: `${hourNum % 12} ${amPm}`,
+        hour:
+          hourNum === parseInt(firstHour) ? "Now" : `${hourNum % 12} ${amPm}`,
       };
     });
   };

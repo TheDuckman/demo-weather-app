@@ -1,7 +1,10 @@
 <template>
-  <div :class="`cityBtn ${selected ? 'blueBg' : ''}`" @click="emit('clicked')">
-    <slot></slot>
-    (IC)
+  <div
+    :class="`cityBtn d-flex justify-content-center align-items-center ${selected ? 'blueBg' : ''}`"
+    @click="emit('clicked')"
+  >
+    <div class="me-2">{{ text }}</div>
+    <div v-html="icon" class="fs-5"></div>
   </div>
 </template>
 
@@ -14,6 +17,10 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  text: {
+    type: String,
+    required: false,
+  },
   selected: {
     type: Boolean,
     required: false,
@@ -22,6 +29,7 @@ const props = defineProps({
 });
 
 const selected = computed(() => props.selected);
+const text = computed(() => props.text);
 </script>
 
 <style scoped>

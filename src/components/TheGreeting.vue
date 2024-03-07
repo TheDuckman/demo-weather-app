@@ -8,7 +8,7 @@
 import { computed, ref } from "vue";
 
 // greeting
-const username = "Chang";
+const username = "Human";
 const now = ref(new Date());
 const calculatedGreeting = computed<string>((): string => {
   const hours = now.value.getHours();
