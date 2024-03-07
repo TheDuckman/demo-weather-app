@@ -16,6 +16,7 @@ import requester from "./requester";
 export const useStore = defineStore("store", () => {
   // loading
   const loading = ref(false);
+  const delayTime = ref(200);
 
   // city
   const availableCities = ref<CityObj[]>([
@@ -82,7 +83,7 @@ export const useStore = defineStore("store", () => {
     } finally {
       setTimeout(() => {
         loading.value = false;
-      }, 250);
+      }, delayTime.value);
     }
   };
   const setForecastData = async function () {
@@ -121,7 +122,7 @@ export const useStore = defineStore("store", () => {
     } finally {
       setTimeout(() => {
         loading.value = false;
-      }, 250);
+      }, delayTime.value);
     }
   };
   const fetchWeatherData = async function () {

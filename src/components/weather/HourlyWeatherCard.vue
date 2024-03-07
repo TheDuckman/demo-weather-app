@@ -1,21 +1,9 @@
 <template>
-  <div
-    :class="[
-      'debugBorder',
-      'd-flex',
-      'flex-column',
-      'flex-fill',
-      'justify-content-around',
-      'text-center',
-      'p-2',
-      'mx-3',
-      isMobile ? 'widthMobile' : 'widthDesktop',
-    ]"
-  >
-    <div class="fs-5 fw-bold greyTxt">
+  <WhiteCard>
+    <template #text>
       {{ hour }}
-    </div>
-    <div class="d-flex justify-content-center">
+    </template>
+    <template #icon>
       <WeatherIcon
         :color="weatherColor"
         :iconSize="IconSizes.SMALL"
@@ -23,18 +11,20 @@
         :weather="weather"
         :weatherCode="weatherCode"
       />
-    </div>
-    <TemperatureBox :degrees="degrees" />
-  </div>
+    </template>
+    <template #temperature>
+      <TemperatureBox :degrees="degrees" />
+    </template>
+  </WhiteCard>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import useResponsiveness from "../../composable/useResponsiveness";
+import { IconHaloSizes, IconSizes } from "../../utils/enums";
 import useWeatherColors from "../../composable/useWeatherColors";
+import WhiteCard from "../layout/WhiteCard.vue";
 import WeatherIcon from "./WeatherIcon.vue";
 import TemperatureBox from "./TemperatureBox.vue";
-import { IconHaloSizes, IconSizes } from "../../utils/enums";
 
 const props = defineProps({
   hour: {
@@ -52,23 +42,11 @@ const props = defineProps({
   weatherCode: {
     type: Number,
     required: true,
-  }
+  },
 });
-
-const { isMobile } = useResponsiveness();
 const { getWeatherColor } = useWeatherColors();
-
 const hour = computed(() => props.hour);
 const degrees = computed(() => props.degrees);
 const weather = computed(() => props.weather);
 const weatherColor = computed(() => getWeatherColor(degrees.value));
 </script>
-
-<style scoped>
-.widthMobile {
-  min-width: 8rem;
-}
-.widthDesktop {
-  width: 20%;
-}
-</style>

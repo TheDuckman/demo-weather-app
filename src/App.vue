@@ -7,7 +7,7 @@
         <!-- LEFT SIDE -->
         <div :class="`debugBorder col-md-3 col-sm-12 ${isMobile ? 'p-0' : ''}`">
           <!-- CITY WEATHER -->
-          <LoadingCard v-if="isLoading" large />
+          <LoadingRoundedCard v-if="isLoading" large />
           <CityWeatherCard v-else />
         </div>
         <!-- RIGHT SIDE -->
@@ -22,14 +22,19 @@
               isMobile ? 'hourlyContainerMobile' : 'halfHeight pt-5',
             ]"
           >
-            <HourlyWeatherCard
-              v-for="forecastHour in hourlyForecast"
-              :key="forecastHour.hour"
-              :hour="forecastHour.hour"
-              :weather="forecastHour.text"
-              :degrees="forecastHour.tempC"
-              :weatherCode="forecastHour.code"
-            />
+            <template v-if="isLoading">
+              <LoadingWhiteCard v-for="it in loadingArr" :key="it" />
+            </template>
+            <template v-else>
+              <HourlyWeatherCard
+                v-for="forecastHour in hourlyForecast"
+                :key="forecastHour.hour"
+                :hour="forecastHour.hour"
+                :weather="forecastHour.text"
+                :degrees="forecastHour.tempC"
+                :weatherCode="forecastHour.code"
+              />
+            </template>
           </div>
           <!-- DAILY WEATHER -->
           <div
@@ -42,7 +47,7 @@
             ]"
           >
             <template v-if="isLoading">
-              <LoadingCard v-for="it in [1, 2, 3, 4, 5]" :key="it" />
+              <LoadingRoundedCard v-for="it in loadingArr" :key="it" />
             </template>
             <template v-else>
               <DailyWeatherCard
@@ -62,11 +67,12 @@
 </template>
 
 <script setup lang="ts">
-import { ComputedRef, computed, onBeforeMount } from "vue";
+import { ComputedRef, computed, onBeforeMount, ref } from "vue";
 import { useStore } from "./store";
 import { DailyWeatherObj, HourlyWeatherObj } from "./utils/types";
 import useResponsiveness from "./composable/useResponsiveness";
-import LoadingCard from "./components/layout/LoadingCard.vue";
+import LoadingRoundedCard from "./components/layout/LoadingRoundedCard.vue";
+import LoadingWhiteCard from "./components/layout/LoadingWhiteCard.vue";
 import TheGreeting from "./components/TheGreeting.vue";
 import CityMenu from "./components/CityMenu.vue";
 import DailyWeatherCard from "./components/weather/DailyWeatherCard.vue";
@@ -83,6 +89,7 @@ const hourlyForecast: ComputedRef<HourlyWeatherObj[]> = computed(
 );
 
 const { isMobile } = useResponsiveness();
+const loadingArr = ref([1, 2, 3, 4, 5]);
 
 onBeforeMount(() => {
   store.fetchWeatherData();
