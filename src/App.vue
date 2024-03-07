@@ -15,10 +15,9 @@
           <!-- HOURLY WEATHER -->
           <div
             :class="[
-              'scrollX',
               'd-flex',
               'justify-content-md-between',
-              isMobile ? 'hourlyContainerMobile' : 'halfHeight pt-5',
+              isMobile ? 'hourlyContainerMobile' : 'scrollX halfHeight pt-5',
             ]"
           >
             <template v-if="isLoading">
