@@ -1,6 +1,6 @@
 # Weather App (Portfolio Project)
 
-This project was built by me, Gabriel Pato, to check my Vue.js 3 skills. All weather data is obtained from [the Weather API](https://www.weatherapi.com/).
+This project was built by me, Gabriel Pato, to practice my Vue.js 3 skills. All weather data is obtained from [the Weather API](https://www.weatherapi.com/).
 
 ## ✨ Features
 
@@ -11,11 +11,12 @@ This project was built by me, Gabriel Pato, to check my Vue.js 3 skills. All wea
 
 ## 🛠️ Tech
 
-The app was built using Vue.js version 3 (and using the composition API). Other technologies that were used are listed here:
+The app was built using Vue.js version 3 (and using the composition API). Other technologies/libraries that were used are listed here:
 
 - Pinia (store)
 - Axios (HTTP requests)
 - Bootstrap (layout)
+- LoDash (misc)
 - TypeScript (typing)
 
 ## 🔗 Links
