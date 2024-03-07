@@ -2,8 +2,10 @@ import { defineStore } from "pinia";
 import { ComputedRef, computed, reactive, ref } from "vue";
 import {
   CityObj,
+  CurrentWeatherData,
   DailyWeatherObj,
   ForecastData,
+  ForecastDay,
   HourData,
   HourlyWeatherObj,
   WeatherObj,
@@ -12,6 +14,9 @@ import { BaseWeatherCode } from "./utils/constants";
 import requester from "./requester";
 
 export const useStore = defineStore("store", () => {
+  // loading
+  const loading = ref(false);
+
   // city
   const availableCities = ref<CityObj[]>([
     {
@@ -64,9 +69,9 @@ export const useStore = defineStore("store", () => {
   const dailyForecast = ref<DailyWeatherObj[]>([]);
   const hourlyForecast = ref<HourlyWeatherObj[]>([]);
   const setCurrentData = async function () {
+    loading.value = true;
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const currData: any = await requester.currentWeather(
+      const currData: CurrentWeatherData = await requester.currentWeather(
         selectedCity.value.name,
       );
       currWeather.text = currData.current.condition.text;
@@ -74,24 +79,26 @@ export const useStore = defineStore("store", () => {
       currWeather.tempC = Math.round(currData.current.temp_c);
     } catch (error) {
       console.error(error);
+    } finally {
+      setTimeout(() => {
+        loading.value = false;
+      }, 250);
     }
   };
   const setForecastData = async function () {
+    loading.value = true;
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const foreData: ForecastData = await requester.forecastWeather(
         selectedCity.value.name,
       );
       const [localDate, localHour] = foreData.location.localtime.split(" ");
 
       // daily forecast data
-      // dailyForecast.value.splice(0, dailyForecast.value.length);
       dailyForecast.value = [];
       dailyForecast.value.push(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ...foreData.forecast.forecastday.map((dayData: any) => {
+        ...foreData.forecast.forecastday.map((dayData: ForecastDay) => {
           return {
-            weekday: getWeekdayFromDbDate(dayData.date), // change
+            weekday: getWeekdayFromDbDate(dayData.date),
             tempC: Math.round(dayData.day.avgtemp_c),
             text: dayData.day.condition.text,
             code: dayData.day.condition.code,
@@ -100,7 +107,6 @@ export const useStore = defineStore("store", () => {
       );
 
       // hourly forecast data
-      // hourlyForecast.value.splice(0, hourlyForecast.value.length);
       const localTodayIndex: number = foreData.forecast.forecastday.findIndex(
         (day) => day.date === localDate,
       );
@@ -112,6 +118,10 @@ export const useStore = defineStore("store", () => {
       ];
     } catch (error) {
       console.error(error);
+    } finally {
+      setTimeout(() => {
+        loading.value = false;
+      }, 250);
     }
   };
   const fetchWeatherData = async function () {
@@ -138,7 +148,7 @@ export const useStore = defineStore("store", () => {
     return firstFiveHours.map((hour: HourData) => {
       const time = hour.time.split(" ")[1];
       const hourNum = parseInt(time.split(":")[0]);
-      const amPm = hourNum > 12 ? "PM" : "AM";
+      const amPm = hourNum >= 12 ? "PM" : "AM";
       return {
         code: hour.condition.code,
         text: hour.condition.text,
@@ -150,6 +160,7 @@ export const useStore = defineStore("store", () => {
   };
 
   return {
+    loading,
     // city
     availableCities,
     selectedCity,

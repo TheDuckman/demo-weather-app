@@ -20,6 +20,15 @@ export interface CityObj {
 
 // weather api types
 
+export interface CurrentWeatherData {
+  current: {
+    condition: {
+      text: string;
+      code: number;
+    };
+    temp_c: number;
+  };
+}
 export interface ForecastData {
   forecast: {
     forecastday: ForecastDay[];
@@ -28,7 +37,6 @@ export interface ForecastData {
     localtime: string;
   };
 }
-
 export interface ForecastDay {
   date: string;
   day: DayData;
@@ -41,7 +49,6 @@ export interface DayData {
     code: number;
   };
 }
-
 export interface HourData {
   time: string;
   temp_c: number;
