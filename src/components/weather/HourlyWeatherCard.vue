@@ -21,6 +21,7 @@
         :iconSize="IconSizes.SMALL"
         :haloSize="IconHaloSizes.LARGER"
         :weather="weather"
+        :weatherCode="weatherCode"
       />
     </div>
     <TemperatureBox :degrees="degrees" />
@@ -48,6 +49,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  weatherCode: {
+    type: Number,
+    required: true,
+  }
 });
 
 const { isMobile } = useResponsiveness();

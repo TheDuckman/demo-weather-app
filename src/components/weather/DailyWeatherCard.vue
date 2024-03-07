@@ -6,6 +6,7 @@
         :iconSize="IconSizes.SMALL"
         :color="weatherColor"
         :weather="weather"
+        :weatherCode="weatherCode"
       />
     </template>
     <template #text>
@@ -41,6 +42,10 @@ const props = defineProps({
     required: true,
   },
   degrees: {
+    type: Number,
+    required: true,
+  },
+  weatherCode: {
     type: Number,
     required: true,
   },

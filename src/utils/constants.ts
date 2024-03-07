@@ -6,7 +6,6 @@ import rainPath from "../assets/images/rain.png";
 import sunRainPath from "../assets/images/sunRain.png";
 import freezeFogPath from "../assets/images/freezeFog.png";
 import pelletsPath from "../assets/images/pellets.png";
-import patchyRainPath from "../assets/images/patchyRain.png";
 import lightSnowPath from "../assets/images/lightSnow.png";
 import heavySnowPath from "../assets/images/heavySnow.png";
 import snowRainPath from "../assets/images/snowRain.png";
@@ -132,7 +131,7 @@ export const WeatherCodes = {
     code: 1180,
     day: "Patchy light rain",
     night: "Patchy light rain",
-    icon: patchyRainPath,
+    icon: sunRainPath,
   },
   "1183": {
     code: 1183,
@@ -288,7 +287,7 @@ export const WeatherCodes = {
     code: 1273,
     day: "Patchy light rain with thunder",
     night: "Patchy light rain with thunder",
-    icon: patchyRainPath,
+    icon: sunRainPath,
   },
   "1276": {
     code: 1276,
