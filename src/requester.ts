@@ -2,7 +2,7 @@ import axios from "axios";
 import { CurrentWeatherData, ForecastData } from "./utils/types";
 
 const apiKey: string = import.meta.env.VITE_API_KEY;
-axios.defaults.baseURL = "http://api.weatherapi.com/v1";
+axios.defaults.baseURL = "https://api.weatherapi.com/v1";
 axios.defaults.params = {
   key: apiKey,
 };
