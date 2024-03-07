@@ -13,13 +13,22 @@ export interface HourlyWeatherObj extends WeatherObj {
 }
 
 export interface CityObj {
+  id: number;
   name: string;
   icon: string;
   selected: boolean;
 }
 
 // weather api types
-
+export interface CitySearchData {
+  id: number;
+  lat: number;
+  lon: number;
+  country: string;
+  name: string;
+  region: string;
+  url: string;
+}
 export interface CurrentWeatherData {
   current: {
     condition: {

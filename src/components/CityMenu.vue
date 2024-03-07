@@ -5,16 +5,19 @@
       :key="city.name"
       :icon="city.icon"
       :text="city.name"
-      :selected="city.selected"
+      :color="city.selected ? WeatherColors.BLUE : ''"
       @clicked="setCity(city.name)"
     />
+    <AddCityButton />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "../store";
+import { WeatherColors } from "../utils/enums";
 import SmallButton from "./layout/SmallButton.vue";
+import AddCityButton from "./AddCityButton.vue";
 import useResponsiveness from "../composable/useResponsiveness";
 
 const store = useStore();

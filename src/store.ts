@@ -21,26 +21,31 @@ export const useStore = defineStore("store", () => {
   // city
   const availableCities = ref<CityObj[]>([
     {
+      id: 2618724,
       name: "New York",
       icon: "&#x1F3E2;",
       selected: true,
     },
     {
+      id: 317748,
       name: "Toronto",
       icon: "&#x26C4",
       selected: false,
     },
     {
+      id: 287907,
       name: "Rio de Janeiro",
       icon: "&#x1F3D6",
       selected: false,
     },
     {
+      id: 1734598,
       name: "Lagos",
       icon: "&#x1F1F3;&#x1F1EC",
       selected: false,
     },
     {
+      id: 555772,
       name: "Prague",
       icon: "&#x1F3F0",
       selected: false,
@@ -60,6 +65,18 @@ export const useStore = defineStore("store", () => {
     // otherwise, use watcher on selectedCity
     fetchWeatherData();
   };
+  const addCity = function (id: number, name: string, icon: string) {
+    availableCities.value.push(
+      reactive({
+        icon: icon,
+        id,
+        name,
+        selected: false,
+      } as CityObj),
+    );
+    // select new city
+    setCity(name as string);
+  };
 
   // weather
   const currWeather = reactive<WeatherObj>({
@@ -73,7 +90,7 @@ export const useStore = defineStore("store", () => {
     loading.value = true;
     try {
       const currData: CurrentWeatherData = await requester.currentWeather(
-        selectedCity.value.name,
+        selectedCity.value.id,
       );
       currWeather.text = currData.current.condition.text;
       currWeather.code = currData.current.condition.code;
@@ -90,7 +107,7 @@ export const useStore = defineStore("store", () => {
     loading.value = true;
     try {
       const foreData: ForecastData = await requester.forecastWeather(
-        selectedCity.value.name,
+        selectedCity.value.id,
       );
       const [localDate, localHour] = foreData.location.localtime.split(" ");
 
@@ -166,6 +183,7 @@ export const useStore = defineStore("store", () => {
     availableCities,
     selectedCity,
     setCity,
+    addCity,
     // weather
     fetchWeatherData,
     currWeather,

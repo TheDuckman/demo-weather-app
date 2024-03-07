@@ -1,15 +1,18 @@
 <template>
   <div
-    :class="`cityBtn d-flex justify-content-center align-items-center ${selected ? 'blueBg' : ''}`"
+    :class="`cityBtn d-flex justify-content-center align-items-center ${color}`"
     @click="emit('clicked')"
   >
-    <div class="me-2">{{ text }}</div>
-    <div v-html="icon" class="fs-5"></div>
+    <slot v-if="slotUsed"></slot>
+    <template v-else>
+      <div class="me-2">{{ text }}</div>
+      <div v-html="icon" class="fs-5"></div>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits } from "vue";
+import { computed, defineEmits, useSlots } from "vue";
 
 const emit = defineEmits(["clicked"]);
 const props = defineProps({
@@ -21,14 +24,18 @@ const props = defineProps({
     type: String,
     required: false,
   },
-  selected: {
-    type: Boolean,
+  color: {
+    type: String,
     required: false,
-    default: false,
+    default: "",
   },
 });
 
-const selected = computed(() => props.selected);
+const slots = useSlots();
+const slotUsed = computed(() => slots.default);
+const color = computed(() =>
+  props.color.length > 0 ? `${props.color}Bg` : "",
+);
 const text = computed(() => props.text);
 </script>
 
