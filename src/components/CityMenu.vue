@@ -1,14 +1,5 @@
 <template>
-  <div
-    :class="[
-      'd-flex',
-      'scrollX',
-      'py-3',
-      isMobile ? '' : 'px-3',
-      'debugBorder',
-      'mb-2',
-    ]"
-  >
+  <div :class="['d-flex', 'scrollX', 'py-3', 'mb-2', isMobile ? '' : 'px-3']">
     <SmallButton
       v-for="city in cities"
       :key="city.name"

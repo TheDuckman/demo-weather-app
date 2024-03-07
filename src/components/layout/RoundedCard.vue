@@ -2,7 +2,6 @@
   <div :class="cardClasses">
     <div
       :class="[
-        'debugBorder2',
         'd-flex',
         'justify-content-center',
         isMobile ? 'align-items-center width20' : 'align-items-end height30',
@@ -12,7 +11,6 @@
     </div>
     <div
       :class="[
-        'debugBorder2',
         'd-flex',
         'flex-column',
         isMobile
@@ -24,7 +22,6 @@
     </div>
     <div
       :class="[
-        'debugBorder2',
         'text-center',
         'justify-content-end',
         isMobile ? 'd-flex align-items-center width25' : '',
@@ -56,7 +53,6 @@ const large = computed(() => props.large);
 const { isMobile } = useResponsiveness();
 const cardClasses = computed(() => {
   let classes = [
-    "debugBorder",
     "d-flex",
     "flex-fill",
     "flex-md-column",

@@ -1,7 +1,6 @@
 <template>
   <div
     :class="[
-      'debugBorder',
       'd-flex',
       'flex-column',
       'flex-fill',

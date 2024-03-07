@@ -1,21 +1,20 @@
 <template>
-  <div class="container debugBorder">
+  <div class="container">
     <TheGreeting />
     <CityMenu />
-    <div class="container debugBorder">
+    <div class="container">
       <div class="row rowContainer">
         <!-- LEFT SIDE -->
-        <div :class="`debugBorder col-md-3 col-sm-12 ${isMobile ? 'p-0' : ''}`">
+        <div :class="`col-md-3 col-sm-12 ${isMobile ? 'p-0' : ''}`">
           <!-- CITY WEATHER -->
           <LoadingRoundedCard v-if="isLoading" large />
           <CityWeatherCard v-else />
         </div>
         <!-- RIGHT SIDE -->
-        <div class="debugBorder p-0 col-md-9 col-sm-12">
+        <div class="p-0 col-md-9 col-sm-12">
           <!-- HOURLY WEATHER -->
           <div
             :class="[
-              'debugBorder',
               'scrollX',
               'd-flex',
               'justify-content-md-between',
@@ -39,11 +38,9 @@
           <!-- DAILY WEATHER -->
           <div
             :class="[
-              'halfHeight',
-              'debugBorder',
               'd-md-flex',
               'justify-content-md-between',
-              isMobile ? '' : 'pt-5',
+              isMobile ? 'mb-3' : 'halfHeight pt-5',
             ]"
           >
             <template v-if="isLoading">

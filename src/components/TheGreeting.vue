@@ -1,5 +1,5 @@
 <template>
-  <h1 class="greetingHeader debugBorder">
+  <h1 class="greetingHeader">
     {{ calculatedGreeting }}
   </h1>
 </template>
