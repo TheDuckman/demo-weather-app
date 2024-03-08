@@ -87,7 +87,6 @@ export const useStore = defineStore("store", () => {
   const dailyForecast = ref<DailyWeatherObj[]>([]);
   const hourlyForecast = ref<HourlyWeatherObj[]>([]);
   const setCurrentData = async function () {
-    // loading.value = true;
     try {
       const currData: CurrentWeatherData = await requester.currentWeather(
         selectedCity.value.id,
@@ -97,14 +96,9 @@ export const useStore = defineStore("store", () => {
       currWeather.tempC = Math.round(currData.current.temp_c);
     } catch (error) {
       console.error(error);
-    } finally {
-      // setTimeout(() => {
-      //   loading.value = false;
-      // }, delayTime.value);
     }
   };
   const setForecastData = async function () {
-    // loading.value = true;
     try {
       const foreData: ForecastData = await requester.forecastWeather(
         selectedCity.value.id,
@@ -136,10 +130,6 @@ export const useStore = defineStore("store", () => {
       ];
     } catch (error) {
       console.error(error);
-    } finally {
-      // setTimeout(() => {
-      //   loading.value = false;
-      // }, delayTime.value);
     }
   };
   const fetchWeatherData = async function () {
