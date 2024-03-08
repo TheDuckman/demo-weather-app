@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ComputedRef, computed, reactive, ref } from "vue";
+import { ComputedRef, computed, nextTick, reactive, ref } from "vue";
 import {
   CityObj,
   CurrentWeatherData,
@@ -87,7 +87,7 @@ export const useStore = defineStore("store", () => {
   const dailyForecast = ref<DailyWeatherObj[]>([]);
   const hourlyForecast = ref<HourlyWeatherObj[]>([]);
   const setCurrentData = async function () {
-    loading.value = true;
+    // loading.value = true;
     try {
       const currData: CurrentWeatherData = await requester.currentWeather(
         selectedCity.value.id,
@@ -98,13 +98,13 @@ export const useStore = defineStore("store", () => {
     } catch (error) {
       console.error(error);
     } finally {
-      setTimeout(() => {
-        loading.value = false;
-      }, delayTime.value);
+      // setTimeout(() => {
+      //   loading.value = false;
+      // }, delayTime.value);
     }
   };
   const setForecastData = async function () {
-    loading.value = true;
+    // loading.value = true;
     try {
       const foreData: ForecastData = await requester.forecastWeather(
         selectedCity.value.id,
@@ -137,13 +137,19 @@ export const useStore = defineStore("store", () => {
     } catch (error) {
       console.error(error);
     } finally {
-      setTimeout(() => {
-        loading.value = false;
-      }, delayTime.value);
+      // setTimeout(() => {
+      //   loading.value = false;
+      // }, delayTime.value);
     }
   };
   const fetchWeatherData = async function () {
+    loading.value = true;
     await Promise.all([setCurrentData(), setForecastData()]);
+    setTimeout(() => {
+      nextTick(() => {
+        loading.value = false;
+      });
+    }, delayTime.value);
   };
 
   // helper
